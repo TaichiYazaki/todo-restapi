@@ -1,0 +1,61 @@
+openapi: "3.0.0"
+info:
+  title: TODO API Document
+  version: "0.0.1"
+paths:
+  /health:
+    get:
+      responses:
+        '200':
+          description: "OK"
+  /tasks/:
+    post:
+      summary: "タスク作成"
+      description: "タスクを新規作成します" 
+      operationId: "createTask"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaskForm"
+      responses:
+        201:
+          description: "Created"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskDTO"
+components:
+  schemas:
+    TaskForm:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: "ID"
+        store:
+          type: string
+          description: "店名"
+        price:
+          type: integer
+          description: "値段"
+      required:
+        - store
+        - price
+    TaskDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: "ID"
+        store:
+          type: string
+          description: "店名"
+        price:
+          type: integer
+          description: "値段"
+      required:
+        - id
+        - store
+        - price
