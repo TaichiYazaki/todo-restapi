@@ -1,4 +1,5 @@
 package com.example.todorestapi.Controller;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,34 +30,29 @@ public class MainController {
     private HttpHeaders httpHeaders = new HttpHeaders();
 
     @RequestMapping("/")
-    public String index(TaskForm form,Model model) {
-        /*ResponseEntity<List<TaskEntity>> response = restTemplate.exchange(
-                "http://localhost:8080/tasks/", HttpMethod.GET, null,
-                new ParameterizedTypeReference<List<TaskEntity>>() {
-                });
-        List<TaskEntity> list = response.getBody();
-        model.addAttribute("list", list);*/
+    public String index(TaskForm form, Model model) {
+        /*
+         * ResponseEntity<List<TaskEntity>> response = restTemplate.exchange(
+         * "http://localhost:8080/tasks/", HttpMethod.GET, null,
+         * new ParameterizedTypeReference<List<TaskEntity>>() {
+         * });
+         * List<TaskEntity> list = response.getBody();
+         * model.addAttribute("list", list);
+         */
         return "main";
     }
 
     @RequestMapping("/create-task")
     public String createTask(TaskForm form) {
         String url = "http://localhost:8080/tasks/";
-        // リクエスト情報の作成
-      TaskEntity entity = new TaskEntity();
+        TaskEntity entity = new TaskEntity();
         entity.setStore(form.getStore());
         entity.setPrice(form.getPrice());
-        ResponseEntity<TaskEntity> response = restTemplate.exchange(
+        restTemplate.exchange(
                 url, HttpMethod.POST,
                 new HttpEntity<>(entity, httpHeaders),
-                TaskEntity.class); 
-        TaskDTO taskDTO = new TaskDTO();
-        taskDTO.setStore(form.getStore());
-        taskDTO.setPrice(form.getPrice());
-        RequestEntity<TaskDTO> request = RequestEntity.post(url).contentType(MediaType.APPLICATION_JSON)
-        .body(taskDTO);
-        return "redirect:/main";
+                TaskEntity.class);
+        return "redirect:/";
     }
-    
 
 }
