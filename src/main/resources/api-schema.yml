@@ -16,6 +16,11 @@ paths:
       responses:
         '200':
           description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TaskListDTO"
+
     post:
       summary: "タスク作成"
       description: "タスクを新規作成します" 
@@ -66,3 +71,9 @@ components:
         - id
         - store
         - price
+    TaskListDTO:
+      description: "タスクのリスト"
+      type: array
+      items:
+        $ref: "#/components/schemas/TaskDTO"
+

@@ -1,5 +1,8 @@
 package com.example.todorestapi.Controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +25,23 @@ public class TaskController implements TasksApi {
     private final TaskSerivce serivce;
 
     //タスク一覧取得API
-    
+    @Override
+    public ResponseEntity<List<TaskDTO>> listTasks() {
+       List<TaskEntity> entity = serivce.find();
+
+       List<TaskDTO> dto = entity.stream()
+                            .map(taskEntity -> {
+                                TaskDTO taskDto = new TaskDTO();
+                                taskDto.setId(taskEntity.getId());
+                                taskDto.setStore(taskEntity.getStore());
+                                taskDto.setPrice(taskEntity.getPrice());
+                                return taskDto;
+                            })
+                            .collect(Collectors.toList());
+
+
+        return ResponseEntity.ok(dto);
+    }
 
     //タスク登録API
     @Override
@@ -36,7 +55,5 @@ public class TaskController implements TasksApi {
         dto.setPrice(entity.getPrice());
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
-    
 
-    
 }
