@@ -21,11 +21,15 @@ public class TaskController implements TasksApi {
     @Autowired
     private final TaskSerivce serivce;
 
+    //タスク一覧取得API
+    
+
+    //タスク登録API
     @Override
     public ResponseEntity<TaskDTO> createTask(TaskForm form) {
         TaskEntity entity = serivce.create(form);
         TaskDTO dto = new TaskDTO();
-        //ポストマンのIDを知るために利用開始
+        //ポストマンでテストの際に取得したIDを知るために利用開始
         dto.setId(entity.getId());
         //終了
         dto.setStore(entity.getStore());
