@@ -20,10 +20,15 @@
         <tr>
             <th>店名</th>
             <th>費用</th>
+            <th>/</th>
         </tr>
         <tr th:each="obj: ${list}">
             <td th:text="${obj.store}"></td>
             <td th:text="${obj.price}"></td>
+            <td>
+                <a th:href="@{/delete/(id=${obj.id})}">削除</a>
+            </td>
+            
         </tr>
     </table>
 </body>

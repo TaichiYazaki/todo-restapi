@@ -44,4 +44,10 @@ public class MainController {
         return "redirect:/";
     }
 
+    @RequestMapping("/delete")
+    public String delete(Integer id) {
+        System.out.println(id);
+        return "redirect:/";
+    }
+
 }

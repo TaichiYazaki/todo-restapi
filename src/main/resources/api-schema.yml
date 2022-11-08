@@ -20,7 +20,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TaskListDTO"
-
     post:
       summary: "タスク作成"
       description: "タスクを新規作成します" 
@@ -38,6 +37,22 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TaskDTO"
+    delete:
+      summary: "タスク削除"
+      description: "指定したタスクを削除します"
+      operationId: "delete"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "更新するタスクのID"
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '204':
+          description: "No Content"
+        
 components:
   schemas:
     TaskForm:
