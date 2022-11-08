@@ -37,6 +37,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TaskDTO"
+  /tasks/{id}:
     delete:
       summary: "タスク削除"
       description: "指定したタスクを削除します"

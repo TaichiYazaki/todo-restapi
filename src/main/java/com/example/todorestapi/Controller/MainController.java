@@ -1,6 +1,8 @@
 package com.example.todorestapi.Controller;
 
 
+import org.springframework.http.HttpMethod;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +17,12 @@ public class MainController {
 
     private RestTemplate restTemplate = new RestTemplate();
 
+
     String url = "http://localhost:8080/tasks/";
 
     @RequestMapping("/")
     public String index(TaskForm form, Model model) {
-        
+        String url = "http://localhost:8080/tasks/";
         ResponseEntity<TaskEntity[]> list = restTemplate.getForEntity(url, TaskEntity[].class);
         TaskEntity[] lists = list.getBody();
         model.addAttribute("list", lists);
@@ -37,6 +40,7 @@ public class MainController {
 
     @RequestMapping("/create-task")
     public String createTask(TaskForm form) {
+        String url = "http://localhost:8080/tasks/";
         TaskEntity entity = new TaskEntity();
         entity.setStore(form.getStore());
         entity.setPrice(form.getPrice());
@@ -46,7 +50,9 @@ public class MainController {
 
     @RequestMapping("/delete")
     public String delete(Integer id) {
-        System.out.println(id);
+        String taskId = id.toString();
+        String url = "http://localhost:8080/tasks/"+taskId;
+        restTemplate.delete(url);
         return "redirect:/";
     }
 

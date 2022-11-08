@@ -30,4 +30,8 @@ public class TaskSerivce {
         return repository.save(entity);
     }
 
+    public void delete(Integer id){
+        repository.deleteById(id);
+    }
+
 }

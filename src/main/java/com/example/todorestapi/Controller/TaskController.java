@@ -3,6 +3,8 @@ package com.example.todorestapi.Controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.Min;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +18,6 @@ import com.example.todorestapi.Service.TaskSerivce;
 
 import lombok.RequiredArgsConstructor;
 
-
 @RestController
 @RequiredArgsConstructor
 public class TaskController implements TasksApi {
@@ -24,36 +25,43 @@ public class TaskController implements TasksApi {
     @Autowired
     private final TaskSerivce serivce;
 
-    //タスク一覧取得API
+    // タスク一覧取得API
     @Override
     public ResponseEntity<List<TaskDTO>> listTasks() {
-       List<TaskEntity> entity = serivce.find();
+        List<TaskEntity> entity = serivce.find();
 
-       List<TaskDTO> dto = entity.stream()
-                            .map(taskEntity -> {
-                                TaskDTO taskDto = new TaskDTO();
-                                taskDto.setId(taskEntity.getId());
-                                taskDto.setStore(taskEntity.getStore());
-                                taskDto.setPrice(taskEntity.getPrice());
-                                return taskDto;
-                            })
-                            .collect(Collectors.toList());
-
+        List<TaskDTO> dto = entity.stream()
+                .map(taskEntity -> {
+                    TaskDTO taskDto = new TaskDTO();
+                    taskDto.setId(taskEntity.getId());
+                    taskDto.setStore(taskEntity.getStore());
+                    taskDto.setPrice(taskEntity.getPrice());
+                    return taskDto;
+                })
+                .collect(Collectors.toList());
 
         return ResponseEntity.ok(dto);
     }
 
-    //タスク登録API
+    // タスク登録API
     @Override
     public ResponseEntity<TaskDTO> createTask(TaskForm form) {
         TaskEntity entity = serivce.create(form);
         TaskDTO dto = new TaskDTO();
-        //ポストマンでテストの際に取得したIDを知るために利用開始
+        // ポストマンでテストの際に取得したIDを知るために利用開始
         dto.setId(entity.getId());
-        //終了
+        // 終了
         dto.setStore(entity.getStore());
         dto.setPrice(entity.getPrice());
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
+
+    // タスクの削除
+    @Override
+    public ResponseEntity<Void> delete(@Min(1) Integer id) {
+        serivce.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
 }

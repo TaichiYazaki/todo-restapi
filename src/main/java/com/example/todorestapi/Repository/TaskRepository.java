@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.todorestapi.Entity.TaskEntity;
 
-public interface TaskRepository extends JpaRepository <TaskEntity, String> {
+public interface TaskRepository extends JpaRepository <TaskEntity, Integer> {
     
 }
