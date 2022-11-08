@@ -1,5 +1,6 @@
 package com.example.todorestapi.Controller;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,10 +49,7 @@ public class MainController {
         TaskEntity entity = new TaskEntity();
         entity.setStore(form.getStore());
         entity.setPrice(form.getPrice());
-        restTemplate.exchange(
-                url, HttpMethod.POST,
-                new HttpEntity<>(entity, httpHeaders),
-                TaskEntity.class);
+        restTemplate.postForObject(url,entity,TaskEntity.class);
         return "redirect:/";
     }
 
