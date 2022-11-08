@@ -21,14 +21,13 @@ public class MainController {
 
     @RequestMapping("/")
     public String index(TaskForm form, Model model) {
-        /*String url = "http://localhost:8080/tasks/";
+        String url = "http://localhost:8080/tasks/";
         ResponseEntity<List<TaskEntity>> response = restTemplate.exchange(
                 url, HttpMethod.GET, null,
                 new ParameterizedTypeReference<List<TaskEntity>>() {
                 });
         List<TaskEntity> list = response.getBody();
         model.addAttribute("list", list);
-*/
         return "main";
          
     }
