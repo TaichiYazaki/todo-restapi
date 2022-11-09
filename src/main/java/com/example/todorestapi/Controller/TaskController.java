@@ -29,8 +29,11 @@ public class TaskController implements TasksApi {
     @Override
     public ResponseEntity<List<TaskDTO>> listTasks() {
         List<TaskEntity> entity = serivce.find();
-
         List<TaskDTO> dto = entity.stream()
+                            .map(this::toTaskDTO)
+                            .collect(Collectors.toList());
+        //冗長なコード
+       /*  List<TaskDTO> dto = entity.stream()
                 .map(taskEntity -> {
                     TaskDTO taskDto = new TaskDTO();
                     taskDto.setId(taskEntity.getId());
@@ -39,7 +42,7 @@ public class TaskController implements TasksApi {
                     return taskDto;
                 })
                 .collect(Collectors.toList());
-
+        */
         return ResponseEntity.ok(dto);
     }
 
@@ -63,5 +66,12 @@ public class TaskController implements TasksApi {
         return ResponseEntity.noContent().build();
     }
 
+    private TaskDTO toTaskDTO(TaskEntity entity){
+        TaskDTO dto = new TaskDTO();
+        dto.setId(entity.getId());
+        dto.setStore(entity.getStore());
+        dto.setPrice(entity.getPrice());
+        return dto;
+    }
 
 }
