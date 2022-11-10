@@ -3,11 +3,6 @@ info:
   title: TODO API Document
   version: "0.0.1"
 paths:
-  /health:
-    get:
-      responses:
-        '200':
-          description: "OK"
   /tasks/:
     get:
       summary: "タスク一覧取得"

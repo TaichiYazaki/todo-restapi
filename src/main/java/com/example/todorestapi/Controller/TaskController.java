@@ -32,19 +32,9 @@ public class TaskController implements TasksApi {
         List<TaskDTO> dto = entity.stream()
                             .map(this::toTaskDTO)
                             .collect(Collectors.toList());
-        //冗長なコード
-       /*  List<TaskDTO> dto = entity.stream()
-                .map(taskEntity -> {
-                    TaskDTO taskDto = new TaskDTO();
-                    taskDto.setId(taskEntity.getId());
-                    taskDto.setStore(taskEntity.getStore());
-                    taskDto.setPrice(taskEntity.getPrice());
-                    return taskDto;
-                })
-                .collect(Collectors.toList());
-        */
         return ResponseEntity.ok(dto);
     }
+
 
     // タスク登録API
     @Override
@@ -73,5 +63,4 @@ public class TaskController implements TasksApi {
         dto.setPrice(entity.getPrice());
         return dto;
     }
-
 }
