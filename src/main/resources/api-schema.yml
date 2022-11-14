@@ -5,6 +5,8 @@ info:
 paths:
   /tasks/:
     get:
+      tags:
+        - "tasks"
       summary: "タスク一覧取得"
       description: "タスクの一覧を取得できます"
       operationId: listTasks
@@ -16,6 +18,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/TaskListDTO"
     post:
+      tags:
+        - "tasks"
       summary: "タスク作成"
       description: "タスクを新規作成します" 
       operationId: "createTask"
@@ -34,6 +38,8 @@ paths:
                 $ref: "#/components/schemas/TaskDTO"
   /tasks/{id}:
     delete:
+      tags:
+        - "tasks"
       summary: "タスク削除"
       description: "指定したタスクを削除します"
       operationId: "delete"
@@ -57,31 +63,23 @@ components:
         id:
           type: integer
           description: "ID"
-        store:
+        text:
           type: string
-          description: "店名"
-        price:
-          type: integer
-          description: "値段"
+          description: "テキスト"
       required:
-        - store
-        - price
+        - text
     TaskDTO:
       type: object
       properties:
         id:
           type: integer
           description: "ID"
-        store:
+        text:
           type: string
-          description: "店名"
-        price:
-          type: integer
-          description: "値段"
+          description: "テキスト"
       required:
         - id
-        - store
-        - price
+        - text
     TaskListDTO:
       description: "タスクのリスト"
       type: array

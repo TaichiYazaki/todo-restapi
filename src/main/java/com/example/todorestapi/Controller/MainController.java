@@ -1,8 +1,6 @@
 package com.example.todorestapi.Controller;
 
 
-import org.springframework.http.HttpMethod;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,8 +40,7 @@ public class MainController {
     public String createTask(TaskForm form) {
         String url = "http://localhost:8080/tasks/";
         TaskEntity entity = new TaskEntity();
-        entity.setStore(form.getStore());
-        entity.setPrice(form.getPrice());
+        entity.setText(form.getText());
         restTemplate.postForObject(url, entity, TaskEntity.class);
         return "redirect:/";
     }

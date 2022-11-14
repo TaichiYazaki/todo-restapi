@@ -6,13 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
 //JPAで使用するためのEntity
 @Entity
-@Table(name = "todo")
+@Table(name = "todoApi")
 @Data
 public class TaskEntity {
     @Id
@@ -20,9 +19,6 @@ public class TaskEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id=null;
 
-     @Column(name = "store")
-    private String store=null;
-
-     @Column(name = "price")
-    private Integer price=null;  
+     @Column(name = "text")
+    private String text=null;
 }
