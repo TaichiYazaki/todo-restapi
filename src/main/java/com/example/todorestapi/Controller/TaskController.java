@@ -30,7 +30,7 @@ public class TaskController implements TasksApi {
     public ResponseEntity<List<TaskDTO>> listTasks() {
         List<TaskEntity> entity = serivce.find();
         List<TaskDTO> dto = entity.stream()
-                            .map(this::toTaskDTO)
+                            .map(this::toTaskDTO) //this= インスタンスのメソッド(entity=service.find())
                             .collect(Collectors.toList());
         return ResponseEntity.ok(dto);
     }
