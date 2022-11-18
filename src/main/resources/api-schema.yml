@@ -63,31 +63,23 @@ components:
         id:
           type: integer
           description: "ID"
-        store:
+        text:
           type: string
-          description: "店名"
-        price:
-          type: integer
-          description: "値段"
+          description: "テキスト"
       required:
-        - store
-        - price
+        - text
     TaskDTO:
       type: object
       properties:
         id:
           type: integer
           description: "ID"
-        store:
+        text:
           type: string
-          description: "店名"
-        price:
-          type: integer
-          description: "値段"
+          description: "テキスト"
       required:
         - id
-        - store
-        - price
+        - text
     TaskListDTO:
       description: "タスクのリスト"
       type: array

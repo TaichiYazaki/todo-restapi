@@ -25,8 +25,7 @@ public class TaskSerivce {
 
     public TaskEntity create(TaskForm form) {
         TaskEntity entity = new TaskEntity();
-        entity.setStore(form.getStore());
-        entity.setPrice(form.getPrice());
+        entity.setText(form.getText());
         return repository.save(entity);
     }
 

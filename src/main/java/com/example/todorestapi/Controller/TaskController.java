@@ -44,8 +44,7 @@ public class TaskController implements TasksApi {
         // ポストマンでテストの際に取得したIDを知るために利用開始
         dto.setId(entity.getId());
         // 終了
-        dto.setStore(entity.getStore());
-        dto.setPrice(entity.getPrice());
+        dto.setText(entity.getText());
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
@@ -59,8 +58,7 @@ public class TaskController implements TasksApi {
     private TaskDTO toTaskDTO(TaskEntity entity){
         TaskDTO dto = new TaskDTO();
         dto.setId(entity.getId());
-        dto.setStore(entity.getStore());
-        dto.setPrice(entity.getPrice());
+        dto.setText(entity.getText());
         return dto;
     }
 }
